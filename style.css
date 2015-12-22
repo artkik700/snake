@@ -1,0 +1,54 @@
+button {
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+h1 {
+    text-align: center;
+}
+#canvas {
+    border: 1px solid #ccc;
+    display: block;
+    margin: 0 auto;
+}
+
+.user-form {
+    max-width: 700px;
+    margin: 20px auto;
+}
+form {
+}
+form input {
+    margin: 10px;
+    padding: 5px;
+}
+form button[type="submit"] {
+    margin: 10px;
+}
+
+.wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.score-user {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.login .user-form {
+    display: none;
+}
+
+.user-info {
+    display: none;
+}
+
+.login .user-info {
+    display: block;
+}

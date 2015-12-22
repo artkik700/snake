@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shake</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="user-info">
+        <ul>
+            <li>Пользователь: <span id="user_info_name"></span> <a href="#" id="logout">Выйти</a></li>
+            <li>Рекорд: <span id="user_info_score"></span></li>
+        </ul>
+    </div>
+    <h1>Змейка</h1>
+
+    <div class="user-form">
+        <form id="signin_user_form" method="GET" class="test">
+            <fieldset>
+                <legend>Войти:</legend>
+                <label for="userName">Логин: </label>
+                <input id="userName" type="text" name="userName">
+                <label for="userPass">Пароль: </label>
+                <input id="userPass" type="password" name="userPass">
+                <input type="hidden" name="formType" value="signin">
+                <button type="submit">Войти</button>
+            </fieldset>
+        </form>
+        
+        <form id="sign_up_user_form" class="hide" method="GET">
+            <fieldset>
+                <legend>Зарегистрироваться:</legend>
+                <label for="suserName">Логин: </label>
+                <input id="suserName" type="text" name="userName">
+                <label for="suserPass">Пароль: </label>
+                <input id="suserPass" type="password" name="userPass">
+                <input type="hidden" name="formType" value="signup">
+                <button type="submit">Зарегистрироваться</button>
+            </fieldset>     
+        </form>
+
+        <div class="sign-up">
+            <button type="button" id="sign_up_btn">Создать аккаунт?</button>
+        </div>
+    </div>
+    <div class="wrapper">
+        <canvas id="canvas" width="500" height="400"></canvas>
+        <table border="1" class="score-user">
+            <tbody>
+                <tr>
+                   <th>Login</th>
+                   <th>Score</th>
+                </tr>
+                <tr>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="users.js"></script>
+    <script src="snake.js"></script>
+</body>
+</html>
