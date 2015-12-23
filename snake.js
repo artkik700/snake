@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Глобальная область видимости
+    window.scope = scope || {};
+
     // Canvas плюшки
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
@@ -7,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Размеры ячеек змеи и "еды"
     var cw = 10,
+        speed = 1,
         gameLoop,
         d,
         food,
@@ -41,14 +45,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Инициализация всех елементов
-    function init() {
+    function init(selectedSpeed) {
+        speed = selectedSpeed || speed;
         d = "right";
         score = 0;
         createSnake();
         createFood();
         // Движение змеи
         if (typeof gameLoop != "undefined") clearInterval(gameLoop);
-        gameLoop = setInterval(paint, 60);
+        gameLoop = setInterval(paint, (250 / speed));
     }
 
     init();
@@ -135,11 +140,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // События нажатий клавишь для движения змеи
     document.addEventListener("keydown", function(e) {
         var key = e.which;
-        if (key == "65" || key == "37" && d != "right") d = "left";
-        else if (key == "68" || key == "39" && d != "left") d = "right";
-        else if (key == "87" || key == "38" && d != "down") d = "up";
-        else if (key == "83" || key == "40" && d != "up") d = "down";
+        if (key == "65" && d != "right" || key == "37" && d != "right") d = "left";
+        else if (key == "68" && d != "left" || key == "39" && d != "left") d = "right";
+        else if (key == "87" && d != "down" || key == "38" && d != "down") d = "up";
+        else if (key == "83" && d != "up" || key == "40" && d != "up") d = "down";
     });
+
+    // Передаем в глобальную область
+    scope.init = init;
+
 }, false);
 
 
