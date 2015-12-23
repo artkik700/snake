@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Shake</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -27,7 +29,8 @@
                 <button type="submit">Войти</button>
             </fieldset>
         </form>
-        
+
+              
         <form id="sign_up_user_form" class="hide" method="GET">
             <fieldset>
                 <legend>Зарегистрироваться:</legend>
@@ -45,17 +48,40 @@
         </div>
     </div>
     <div class="wrapper">
+        <div class="left-aside aside">
+            <div class="settings">
+                <span>Уровень</span>
+                <select name="speedSettings" id="speed_settings" class="form-control">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+        </div>
+        <div class="right-aside aside">
+            <h4>Рейтинг</h4>
+            <table class="score-user table table-bordered">
+                
+                <tbody>
+                    <tr>
+                       <th class="active">Login</th>
+                       <th class="active">Score</th>
+                       <th class="active">Level</th>
+                    </tr>
+                    <tr>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <canvas id="canvas" width="500" height="400"></canvas>
-        <table border="1" class="score-user">
-            <tbody>
-                <tr>
-                   <th>Login</th>
-                   <th>Score</th>
-                </tr>
-                <tr>
-                </tr>
-            </tbody>
-        </table>
+
     </div>
 
     <script src="users.js"></script>

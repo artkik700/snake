@@ -12,7 +12,7 @@ h1 {
 #canvas {
     border: 1px solid #ccc;
     display: block;
-    margin: 0 auto;
+    margin: 0 29.35%;
 }
 
 .user-form {
@@ -30,15 +30,9 @@ form button[type="submit"] {
 }
 
 .wrapper {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     position: relative;
-}
-
-.score-user {
-    position: absolute;
-    left: 0;
-    top: 0;
 }
 
 .login .user-form {
@@ -51,4 +45,25 @@ form button[type="submit"] {
 
 .login .user-info {
     display: block;
+}
+
+.aside {
+    border: 1px solid #ccc;
+    min-width: 200px;
+    width: 20%;
+    padding: 10px;
+}
+
+.left-aside {
+    float: left;
+    text-align: center;
+}
+.right-aside {
+    float: right;
+}
+
+.form-control {
+    display: inline-block;
+    width: auto;
+    margin: 0 10px;
 }

@@ -1,5 +1,6 @@
 (function() {
   window.API = {};
+  window.scope = {};
 
   var signInForm = document.getElementById('signin_user_form');
   var signUpForm = document.getElementById('sign_up_user_form');
@@ -9,6 +10,7 @@
   var logout = document.getElementById('logout');
   var userInfo = document.querySelector('.user-info');
   window.userInfoScore = document.getElementById('user_info_score');
+  var speedSettings = document.getElementById('speed_settings');
 
   if (getCookie("username")) {
     userInfoName.innerHTML = getCookie("username");
@@ -20,14 +22,18 @@
 
   // получаем данные (пользователей) сразу при загрузке страницы и выводим их
   ajax('read', null, function(res) {
-    res = JSON.parse(res);
+    res = JSON.parse(res)
+      .sort(function(a, b){return parseFloat(b.score) - parseFloat(a.score)});
     var i, tr, td, value; 
+    console.log(res);
 
     for (i = 0; i <= res.length; i++) {
       tr = document.createElement('TR');
 
       for (var key in res[i]) {
         if (key == 'password') continue;
+
+        res[i].score 
 
         td = document.createElement('TD');
         value = document.createTextNode(res[i][key]);
@@ -56,18 +62,30 @@
       ajax('create', data, function(res) {
         res = JSON.parse(res);
         console.log(res);
+        var td, tr, value;
 
-        if (res.status) {
-          if (res.status == "success") { // если есть такой пользователь в "базе"
-            document.cookie = "username=" + res.data.name;
-            document.cookie = "score=" + res.data.score; // записать юзера в куки
-            userInfoName.innerHTML = res.data.name;
-            userInfoScore.innerHTML = res.data.score;
-            document.body.className = "login";
-            return alert(res.message);
-          } else {
-            return alert(res.message);
-          }
+        if (res.status == "success") { // если есть такой пользователь в "базе"
+          document.cookie = "username=" + res.data.name;
+          document.cookie = "score=" + res.data.score; // записать юзера в куки
+          userInfoName.innerHTML = res.data.name;
+          userInfoScore.innerHTML = res.data.score;
+          document.body.className = "login";
+
+          tr = document.createElement('TR');
+          value = document.createTextNode(res.data.name);
+
+          for (var key in res.data) {
+            td = document.createElement('TD');
+            value = document.createTextNode(res.data[key]);
+
+            td.appendChild(value);
+            tr.appendChild(td);
+          };
+
+          userScore.appendChild(tr);
+          return alert(res.message);
+        } else {
+          return alert(res.message);
         }
       });
     }, false);
@@ -90,6 +108,11 @@
       signInForm.className = "";
       this.innerHTML = "Создать аккаунт?"
     }
+  }, false);
+
+  speedSettings.addEventListener('change', function () {
+    var i = this.options.selectedIndex;
+    scope.init(this.options[i].value);
   }, false);
 
   API.updateScore = function(score) {
