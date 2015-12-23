@@ -50,6 +50,7 @@
   [signInForm, signUpForm].forEach(function(el) {
     el.addEventListener('submit', function(e) {
       e.preventDefault();
+      var self = this;
 
       var data = {
         name: this.userName.value,
@@ -71,18 +72,21 @@
           userInfoScore.innerHTML = res.data.score;
           document.body.className = "login";
 
-          tr = document.createElement('TR');
-          value = document.createTextNode(res.data.name);
+          if (self == signUpForm) {
+            tr = document.createElement('TR');
+            value = document.createTextNode(res.data.name);
 
-          for (var key in res.data) {
-            td = document.createElement('TD');
-            value = document.createTextNode(res.data[key]);
+            for (var key in res.data) {
+              td = document.createElement('TD');
+              value = document.createTextNode(res.data[key]);
 
-            td.appendChild(value);
-            tr.appendChild(td);
-          };
+              td.appendChild(value);
+              tr.appendChild(td);
+            };
 
-          userScore.appendChild(tr);
+            userScore.appendChild(tr);
+          }
+          
           return alert(res.message);
         } else {
           return alert(res.message);
