@@ -82,6 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.cookie = "score=" + score;
                 userInfoScore.innerHTML = score;
                 API.updateScore(score);
+                console.log(1);
+                scope.createTableList(true);
             }
             init();
             return;

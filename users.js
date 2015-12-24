@@ -21,30 +21,36 @@
   }
 
   // получаем данные (пользователей) сразу при загрузке страницы и выводим их
-  ajax('read', null, function(res) {
-    res = JSON.parse(res)
-      .sort(function(a, b){return parseFloat(b.score) - parseFloat(a.score)});
-    var i, tr, td, value; 
-    console.log(res);
+  function createTableList(reset) {
+    ajax('read', null, function(res) {
+      res = JSON.parse(res)
+        .sort(function(a, b){return parseFloat(b.score) - parseFloat(a.score)});
+      var i, tr, td, value; 
 
-    for (i = 0; i <= res.length; i++) {
-      tr = document.createElement('TR');
+      if (reset) {
+        userScore.innerHTML = '';
+      }
 
-      for (var key in res[i]) {
-        if (key == 'password') continue;
+      for (i = 0; i <= res.length; i++) {
+        tr = document.createElement('TR');
 
-        res[i].score 
+        for (var key in res[i]) {
+          if (key == 'password') continue;
 
-        td = document.createElement('TD');
-        value = document.createTextNode(res[i][key]);
+          res[i].score 
 
-        td.appendChild(value);
-        tr.appendChild(td);
+          td = document.createElement('TD');
+          value = document.createTextNode(res[i][key]);
+
+          td.appendChild(value);
+          tr.appendChild(td);
+        };
+
+        userScore.appendChild(tr);
       };
-
-      userScore.appendChild(tr);
-    };
-  });
+    });
+  }
+  createTableList();
 
   // onsubmit для обеих форм - зарегистрироваться/войти
   [signInForm, signUpForm].forEach(function(el) {
@@ -117,6 +123,7 @@
   speedSettings.addEventListener('change', function () {
     var i = this.options.selectedIndex;
     scope.init(this.options[i].value);
+    this.blur();
   }, false);
 
   API.updateScore = function(score) {
@@ -167,4 +174,6 @@
 
   window.getCookie = getCookie;
   window.ajax = ajax;
+
+  scope.createTableList = createTableList;
 })();
